@@ -1,0 +1,29 @@
+﻿<Window x:Class="WpfApp.AddCustomerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp"
+        mc:Ignorable="d"
+        Title="Add Customer" Height="350" Width="400">
+    <Grid Margin="10">
+        <StackPanel>
+            <TextBlock Text="Company Name" />
+            <TextBox x:Name="txtCompanyName" />
+
+            <TextBlock Text="Contact Name" />
+            <TextBox x:Name="txtContactName" />
+
+            <TextBlock Text="Contact Title" />
+            <TextBox x:Name="txtContactTitle" />
+
+            <TextBlock Text="Address" />
+            <TextBox x:Name="txtAddress" />
+
+            <TextBlock Text="Phone" />
+            <TextBox x:Name="txtPhone" />
+
+            <Button Content="Save" Click="BtnSave_Click" Margin="0,10,0,0" Width="80" HorizontalAlignment="Center"  />
+        </StackPanel>
+    </Grid>
+</Window>
