@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Services;
+using TranTienDatWPF.Views.Admin;
+
 
 namespace WpfApp
 {
@@ -26,7 +28,7 @@ namespace WpfApp
             InitializeComponent();
         }
 
-        private void BtnLogin_Click(object sender, RoutedEventArgs e)
+        /*private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             var username = txtUsername.Text;
             var password = txtPassword.Password;
@@ -41,6 +43,26 @@ namespace WpfApp
             else
             {
                 MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Đăng nhập thất bại");
+            }
+        }*/
+
+        private void BtnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            var username = txtUsername.Text.Trim();
+            var password = txtPassword.Password.Trim();
+
+            var emp = service.GetByUsername(username);
+            if (emp != null && emp.Password == password)
+            {
+                MessageBox.Show($"Welcome, {emp.Name}!");
+
+                var main = new MainWindow(); // Admin UI
+                main.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Đăng nhập thất bại", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

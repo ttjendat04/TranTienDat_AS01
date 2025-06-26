@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositorie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{6B977531-1236-42E1-BAA2-ECF8FE9F50D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp", "WpfApp\WpfApp.csproj", "{F8F205BE-EBD0-49D9-936D-063582AC275F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranTienDatWPF", "WpfApp\TranTienDatWPF.csproj", "{F8F205BE-EBD0-49D9-936D-063582AC275F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

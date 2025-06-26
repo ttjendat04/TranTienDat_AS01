@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using BusinessObjects;
 using Services;
 
-namespace WpfApp.ViewModels
+namespace TranTienDatWPF.ViewModels.Admin
 {
     public class CustomerViewModel : INotifyPropertyChanged
     {
@@ -25,6 +25,18 @@ namespace WpfApp.ViewModels
         {
             service.Add(c);
             Customers.Add(c);
+        }
+
+        public void UpdateCustomer(Customer updatedCustomer)
+        {
+            service.Update(updatedCustomer);
+
+            var existing = Customers.FirstOrDefault(c => c.CustomerID == updatedCustomer.CustomerID);
+            if (existing != null)
+            {
+                int index = Customers.IndexOf(existing);
+                Customers[index] = updatedCustomer;
+            }
         }
 
         public void DeleteCustomer(int id)

@@ -10,8 +10,8 @@ namespace DataAccessLayer
     public class DataContext
     {
         public static List<Customer> Customers = new List<Customer>() { 
-        new Customer { CustomerID = 1, CompanyName = "Zalo", ContactName = "Alice", ContactTitle = "Manager", Address = "123 Main St", Phone = "123-456-7890" },
-            new Customer { CustomerID = 2, CompanyName = "Facebook", ContactName = "Bob", ContactTitle = "Director", Address = "456 Elm St", Phone = "987-654-3210" },
+        new Customer { CustomerID = 1, CompanyName = "Zalo", ContactName = "Alice", ContactTitle = "Manager", Address = "123 Main St", Phone = "1234567890" },
+            new Customer { CustomerID = 2, CompanyName = "Facebook", ContactName = "Bob", ContactTitle = "Director", Address = "456 Elm St", Phone = "9876543210" },
             new Customer { CustomerID = 3, CompanyName = "FPT Software", ContactName = "Charlie", ContactTitle = "CEO", Address = "789 Oak St", Phone = "555-555-5555" },
             new Customer { CustomerID = 4, CompanyName = "Momo", ContactName = "Micheal", ContactTitle = "Manager", Address = "613 Korea St", Phone = "123-456-78070" },
             new Customer { CustomerID = 5, CompanyName = "Elca", ContactName = "Elon Musk", ContactTitle = "Director", Address = "456 Ank St", Phone = "987-654-3610" },

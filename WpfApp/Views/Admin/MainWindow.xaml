@@ -1,11 +1,11 @@
-﻿<Window x:Class="WpfApp.MainWindow"
+﻿<Window x:Class="TranTienDatWPF.Views.Admin.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="557" Width="800">
     <Grid>
 
         <TabControl>
@@ -15,7 +15,10 @@
                     <TextBox x:Name="txtSearchCustomer" Width="200" Margin="0,10"/>
                     <Button Content="Search" Click="BtnSearchCustomer_Click" Width="100"/>
                     <Button Content="Add Customer" Click="BtnAddCustomer_Click" Width="120" Margin="10"/>
-                    <DataGrid x:Name="dgCustomers" AutoGenerateColumns="True" Height="300"/>
+                    <Button Content="Edit Customer" Click="BtnEditCustomer_Click" Width="120" Margin="5"/>
+                    <Button Content="Delete Customer" Click="BtnDeleteCustomer_Click" Width="120" Margin="5"/>
+
+                    <DataGrid x:Name="dgCustomers" AutoGenerateColumns="True" Height="350" SelectionChanged="dgCustomers_SelectionChanged"/>
                 </StackPanel>
             </TabItem>
 
@@ -25,23 +28,18 @@
                     <TextBox x:Name="txtSearchProduct" Width="200" Margin="0,10"/>
                     <Button Content="Search" Click="BtnSearchProduct_Click" Width="100"/>
                     <Button Content="Add Product" Click="BtnAddProduct_Click" Width="120" Margin="10"/>
+                    <Button Content="Edit Product" Click="BtnEditProduct_Click" Width="120" Margin="5"/>
+                    <Button Content="Delete Product" Click="BtnDeleteProduct_Click" Width="120" Margin="5"/>
+
                     <DataGrid x:Name="dgProducts" AutoGenerateColumns="True" Height="300"/>
                 </StackPanel>
             </TabItem>
 
             <!-- Tab 3: Orders -->
             <TabItem Header="Orders">
-                <TextBlock Text="Chức năng đặt hàng sẽ hiển thị ở đây" Margin="20"/>
-            </TabItem>
-
-            <!-- Tab 4: Reports -->
-            <TabItem Header="Reports">
-                <TextBlock Text="Báo cáo số lượng đơn theo tháng" Margin="20"/>
-            </TabItem>
-            <TabItem Header="Orders">
                 <StackPanel Margin="10">
                     <Button Content="Add Order" Click="BtnAddOrder_Click" Width="100"/>
-                    <DataGrid x:Name="dgOrders" AutoGenerateColumns="False" Height="300">
+                    <DataGrid x:Name="dgOrders" AutoGenerateColumns="False" Height="350">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Order ID" Binding="{Binding OrderID}"/>
                             <DataGridTextColumn Header="CustomerID" Binding="{Binding CustomerID}"/>
@@ -50,6 +48,21 @@
                     </DataGrid>
                 </StackPanel>
             </TabItem>
+
+            <!-- Tab 4: Reports -->
+            <TabItem Header="Reports">
+                <StackPanel Margin="10">
+                    <Button Content="Generate Report" Click="BtnGenerateReport_Click" Width="150" Margin="0,0,0,10"/>
+                    <DataGrid x:Name="dgReports" AutoGenerateColumns="False" Height="300">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Tháng" Binding="{Binding Month}" />
+                            <DataGridTextColumn Header="Số đơn hàng" Binding="{Binding OrderCount}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
+
+
 
         </TabControl>
     </Grid>

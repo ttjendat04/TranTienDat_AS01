@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using BusinessObjects;
 using Services;
 
-namespace WpfApp.ViewModels
+namespace TranTienDatWPF.ViewModels.Admin
 {
     public class ProductViewModel : INotifyPropertyChanged
     {
@@ -25,6 +25,18 @@ namespace WpfApp.ViewModels
             service.Add(p);
             Products.Add(p);
         }
+
+        public void UpdateProduct(Product p)
+        {
+            service.Update(p);
+            var old = Products.FirstOrDefault(x => x.ProductID == p.ProductID);
+            if (old != null)
+            {
+                int idx = Products.IndexOf(old);
+                Products[idx] = p;
+            }
+        }
+
 
         public void DeleteProduct(int id)
         {

@@ -13,8 +13,10 @@ namespace Repositories
         
             private static CustomerRepository _instance;
             private List<Customer> customers;
+       
 
-            private CustomerRepository()
+
+        private CustomerRepository()
             {
                 customers = DataContext.Customers;
             }
@@ -25,19 +27,35 @@ namespace Repositories
 
             public void Add(Customer c) => customers.Add(c);
 
-            public void Update(Customer c)
+        /*public void Update(Customer c)
+        {
+            var index = customers.FindIndex(x => x.CustomerID == c.CustomerID);
+            if (index >= 0) customers[index] = c;
+        }*/
+        public void Update(Customer c)
+        {
+            var existing = customers.FirstOrDefault(x => x.CustomerID == c.CustomerID);
+            if (existing != null)
             {
-                var index = customers.FindIndex(x => x.CustomerID == c.CustomerID);
-                if (index >= 0) customers[index] = c;
+                int index = customers.IndexOf(existing);
+                customers[index] = c;
             }
+        }
+        public Customer? GetByPhone(string phone)
+        {
+            return customers.FirstOrDefault(c => c.Phone == phone);
+        }
 
-            public void Delete(int id) => customers.RemoveAll(c => c.CustomerID == id);
+
+        public void Delete(int id) => customers.RemoveAll(c => c.CustomerID == id);
 
             public Customer GetById(int id) => customers.FirstOrDefault(c => c.CustomerID == id);
 
             public List<Customer> Search(string keyword) =>
                 customers.Where(c => c.CompanyName.Contains(keyword, System.StringComparison.OrdinalIgnoreCase)).ToList();
         }
+
+        
     }
 
 

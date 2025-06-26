@@ -14,8 +14,14 @@ namespace Services
 
         public List<Customer> GetAll() => _repo.GetAll();
         public void Add(Customer c) => _repo.Add(c);
+
         public void Delete(int id) => _repo.Delete(id);
         public void Update(Customer c) => _repo.Update(c);
         public List<Customer> Search(string keyword) => _repo.Search(keyword);
+        public Customer? GetByPhone(string phone)
+        {
+            return _repo.GetByPhone(phone);
+        }
+
     }
 }

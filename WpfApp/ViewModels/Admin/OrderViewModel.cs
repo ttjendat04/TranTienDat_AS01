@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BusinessObjects;
 
-namespace WpfApp.ViewModels
+namespace TranTienDatWPF.ViewModels.Admin
 {
     public class OrderViewModel
     {
