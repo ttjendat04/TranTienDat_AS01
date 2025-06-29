@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CustomerBO = BusinessObjects.Customer;
+using BusinessObjects;
+using TranTienDatWPF.ViewModels.Customer;
 
 namespace TranTienDatWPF.Views.Customer
 {
@@ -20,12 +22,43 @@ namespace TranTienDatWPF.Views.Customer
     /// </summary>
     public partial class CustomerMainWindow : Window
     {
-        private readonly CustomerBO _customer;
+        private readonly CustomerBO currentCustomer;
+        private CustomerOrderViewModel viewModel;
         public CustomerMainWindow(CustomerBO customer)
         {
             InitializeComponent();
-            _customer = customer;
-            txtWelcome.Text = $"Xin chào, {_customer.ContactName}!";
+            currentCustomer = customer;
+            this.Title = $"Khách hàng: {currentCustomer.ContactName}";
+            dgOrderHistory.ItemsSource = new CustomerOrderViewModel(customer.CustomerID).Orders;
+
         }
+
+        private void LoadOrderHistory()
+        {
+            var orders = DataAccessLayer.DataContext.Orders
+                .Where(o => o.CustomerID == currentCustomer.CustomerID)
+                .Select(o => new OrderDisplay
+                {
+                    OrderID = o.OrderID,
+                    OrderDate = o.OrderDate,
+                    TotalAmount = o.OrderDetails.Sum(d => 
+                    d.UnitPrice * d.Quantity * (1 - (decimal)d.Discount))
+                })
+                .ToList();
+
+            dgOrderHistory.ItemsSource = orders;
+        }
+        private void BtnEditProfile_Click(object sender, RoutedEventArgs e)
+        {
+            var editWindow = new EditCustomerWindow(currentCustomer);
+            if (editWindow.ShowDialog() == true)
+            {
+                MessageBox.Show("Hồ sơ đã được cập nhật!");
+                // Bạn có thể reload lại UI nếu cần thiết
+                this.Title = $"Khách hàng: {currentCustomer.ContactName}";
+            }
+        }
+
+
     }
 }

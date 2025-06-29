@@ -15,8 +15,10 @@ namespace TranTienDatWPF
             base.OnStartup(e);
 
             // Gọi cửa sổ đăng nhập của khách hàng
-            var loginWindow = new CustomerLoginWindow();
-            loginWindow.Show();
+            /*var loginWindow = new CustomerLoginWindow();
+            loginWindow.Show();*/
+            var roleSelect = new RoleSelectionWindow();
+            roleSelect.Show();
         }
     }
 

@@ -6,13 +6,23 @@
         xmlns:local="clr-namespace:TranTienDatWPF.Views.Customer"
         mc:Ignorable="d"
         Title="CustomerMainWindow" Height="250" Width="400">
-    <Grid>
-        <TextBlock x:Name="txtWelcome"
-                   FontSize="20"
-                   FontWeight="Bold"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Top"
-                   Text="Xin chào khách hàng!"
-                   Margin="10"/>
-    </Grid>
+    <DockPanel Margin="10">
+        <!-- Nút chỉnh sửa ở dưới cùng -->
+        <Button Content="Chỉnh sửa hồ sơ" 
+                Height="35" 
+                Margin="0,10,0,0"
+                DockPanel.Dock="Bottom"
+                Click="BtnEditProfile_Click" />
+
+        <!-- DataGrid hiển thị lịch sử đơn hàng -->
+        <GroupBox Header="Lịch sử đơn hàng">
+            <DataGrid x:Name="dgOrderHistory" AutoGenerateColumns="False" Height="300">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mã đơn" Binding="{Binding OrderID}" />
+                    <DataGridTextColumn Header="Ngày đặt" Binding="{Binding OrderDate}" />
+                    <DataGridTextColumn Header="Tổng tiền" Binding="{Binding TotalAmount}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+    </DockPanel>
 </Window>

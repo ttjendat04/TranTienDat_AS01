@@ -12,6 +12,8 @@ using BusinessObjects;
 using TranTienDatWPF.Views.Admin;
 using TranTienDatWPF.ViewModels.Admin;
 using CustomerBO = BusinessObjects.Customer;
+using Services;
+using TranTienDatWPF.ViewModels.Customer;
 
 
 namespace TranTienDatWPF.Views.Admin
@@ -66,7 +68,7 @@ namespace TranTienDatWPF.Views.Admin
 
         private readonly OrderViewModel orderVM = new();
 
-        private void BtnAddOrder_Click(object sender, RoutedEventArgs e)
+        /*private void BtnAddOrder_Click(object sender, RoutedEventArgs e)
         {
             var newOrder = new Order
             {
@@ -83,7 +85,18 @@ namespace TranTienDatWPF.Views.Admin
 
             orderVM.AddOrder(newOrder);
             dgOrders.ItemsSource = orderVM.Orders;
+        }*/
+        private void BtnAddOrder_Click(object sender, RoutedEventArgs e)
+        {
+            var popup = new AddOrderWindow(); // cửa sổ tạo đơn hàng
+            if (popup.ShowDialog() == true && popup.NewOrder != null)
+            {
+                orderVM.AddOrder(popup.NewOrder); // thêm vào danh sách
+                dgOrders.ItemsSource = null;
+                dgOrders.ItemsSource = orderVM.Orders; // cập nhật lại DataGrid
+            }
         }
+
 
         private void BtnEditCustomer_Click(object sender, RoutedEventArgs e)
         {
@@ -139,9 +152,13 @@ namespace TranTienDatWPF.Views.Admin
             }
         }
 
+        private readonly OrderService orderService = new();
         private void BtnGenerateReport_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Chức năng báo cáo đang được phát triển.");
+            //MessageBox.Show("Chức năng báo cáo đang được phát triển.");
+            var orders = orderService.GetAll(); // lấy dữ liệu
+            var reportVM = new ReportViewModel(orders); // khởi tạo viewmodel
+            dgReports.ItemsSource = reportVM.Reports; // đẩy dữ liệu lên DataGrid
         }
 
 

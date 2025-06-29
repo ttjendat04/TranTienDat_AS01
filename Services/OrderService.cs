@@ -18,14 +18,26 @@ namespace Services
         public void Update(Order o) => repo.Update(o);
         public void Delete(int id) => repo.Delete(id);
         public Order GetById(int id) => repo.GetById(id);
-        public List<(int Month, int Count)> GetOrderStatsByMonth()
+        /*public List<(int Month, int Count)> GetOrderStatsByMonth()
         {
             return DataContext.Orders
                 .GroupBy(o => o.OrderDate.Month)
                 .Select(g => (Month: g.Key, Count: g.Count()))
                 .OrderByDescending(x => x.Count)
                 .ToList();
+        }*/
+        public List<(string Month, int Count)> GetOrderStatsByMonth()
+        {
+            return DataContext.Orders
+                .GroupBy(o => new { o.OrderDate.Year, o.OrderDate.Month })
+                .Select(g => (
+                    Month: $"{g.Key.Month:D2}/{g.Key.Year}",
+                    Count: g.Count()
+                ))
+                .OrderByDescending(x => x.Month)
+                .ToList();
         }
+
 
     }
 }

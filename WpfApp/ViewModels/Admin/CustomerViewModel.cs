@@ -8,26 +8,28 @@ using System.Text;
 using System.Threading.Tasks;
 using BusinessObjects;
 using Services;
+using CustomerBO = BusinessObjects.Customer;
+
 
 namespace TranTienDatWPF.ViewModels.Admin
 {
     public class CustomerViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Customer> Customers { get; set; }
+        public ObservableCollection<CustomerBO> Customers { get; set; }
         private readonly CustomerService service = new();
 
         public CustomerViewModel()
         {
-            Customers = new ObservableCollection<Customer>(service.GetAll());
+            Customers = new ObservableCollection<CustomerBO>(service.GetAll());
         }
 
-        public void AddCustomer(Customer c)
+        public void AddCustomer(CustomerBO c)
         {
             service.Add(c);
             Customers.Add(c);
         }
 
-        public void UpdateCustomer(Customer updatedCustomer)
+        public void UpdateCustomer(CustomerBO updatedCustomer)
         {
             service.Update(updatedCustomer);
 
